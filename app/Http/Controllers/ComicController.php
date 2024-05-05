@@ -9,6 +9,9 @@ class ComicController extends Controller
 {
     public function index(Comic $comic)//インポートしたComicをインスタンス化して$cominとして使用
         {
-            return $comic->get();//$comicの中身を戻り値にする
+            return view('comics.index')->with(['comics' => $comic->getPaginateByLimit()]);  
+       //blade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
         }
 }
+
+?>
