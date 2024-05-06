@@ -20,35 +20,41 @@ class ComicController extends Controller
      * @return Reposnse post view
      */
     public function show(Comic $comic)
-    {
-        return view('comics.show')->with(['comic' => $comic]);
-     //'post'はbladeファイルで使う変数。中身は$postはid=1のPostインスタンス。
-    }
+        {
+            return view('comics.show')->with(['comic' => $comic]);
+         //'post'はbladeファイルで使う変数。中身は$postはid=1のPostインスタンス。
+        }
     
     public function create()
-    {
-        return view('comics.create');
-    }
+        {
+            return view('comics.create');
+        }
     
     public function store(Comic $comic, ComicRequest $request)
-    {
-        $input = $request['comic'];
-        $comic->fill($input)->save();
-        return redirect('/comics/' . $comic->id);
-    }
+        {
+            $input = $request['comic'];
+            $comic->fill($input)->save();
+            return redirect('/comics/' . $comic->id);
+        }
     
     public function edit(Comic $comic)
-    {
-        return view('comics.edit')->with(['comic' => $comic]);
-    }
+        {
+            return view('comics.edit')->with(['comic' => $comic]);
+        }
     
     public function update(ComicRequest $request, Comic $comic)
-    {
-        $input_comic = $request['comic'];
-        $comic->fill($input_comic)->save();
+        {
+            $input_comic = $request['comic'];
+            $comic->fill($input_comic)->save();
+        
+            return redirect('/comics/' . $comic->id);
+        }
     
-        return redirect('/comics/' . $comic->id);
-    }
+        public function delete(Comic $comic)
+            {
+                $comic->delete();
+                return redirect('/');
+            }
 }
 
 ?>
