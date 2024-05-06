@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comic;
 use App\Http\Requests\ComicRequest; // useする
+use App\Models\Category;
 
 class ComicController extends Controller
 {
@@ -25,16 +26,19 @@ class ComicController extends Controller
          //'post'はbladeファイルで使う変数。中身は$postはid=1のPostインスタンス。
         }
     
-    public function create()
+    public function create(Category $category)
         {
-            return view('comics.create');
+            return view('comics.create')->with(['categories' => $category->get()]);
         }
     
     public function store(Comic $comic, ComicRequest $request)
         {
-            $input = $request['comic'];
-            $comic->fill($input)->save();
-            return redirect('/comics/' . $comic->id);
+            $input_comic = $request['comic'];
+            $input_categories = $request->categories_array;
+            $comic->fill($input_comic)->save();
+            $comic->categories()->attach($input_categories);
+            dd($comic);
+            return redirect('/comics/');
         }
     
     public function edit(Comic $comic)
