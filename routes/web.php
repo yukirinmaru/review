@@ -24,3 +24,5 @@ Route::get('/comics/create', [ComicController::class, 'create']);
 Route::get('/comics/{comic}', [ComicController::class ,'show']);
 // '/posts/{対象データのID}'にGetリクエストが来たら、PostControllerのshowメソッドを実行する
 Route::post('/comics', [ComicController::class, 'store']);
+Route::get('/comics/{comic}/edit', [ComicController::class, 'edit']);
+Route::put('/comics/{comic}', [ComicController::class, 'update']);
