@@ -36,6 +36,19 @@ class ComicController extends Controller
         $comic->fill($input)->save();
         return redirect('/comics/' . $comic->id);
     }
+    
+    public function edit(Comic $comic)
+    {
+        return view('comics.edit')->with(['comic' => $comic]);
+    }
+    
+    public function update(ComicRequest $request, Comic $comic)
+    {
+        $input_comic = $request['comic'];
+        $comic->fill($input_comic)->save();
+    
+        return redirect('/comics/' . $comic->id);
+    }
 }
 
 ?>
