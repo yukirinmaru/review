@@ -19,6 +19,19 @@
                 <textarea name="comic[overview]" placeholder="とても面白かった。">{{ old('comic.overview') }}</textarea>
                 <p class="overview__error" style="color:red">{{ $errors->first('comic.overview') }}</p>
             </div>
+            <div>
+                <h2>Category</h2>
+                @foreach($categories as $category)
+        
+                    <label>
+                        {{-- valueを'$subjectのid'に、nameを'配列名[]'に --}}
+                        <input type="checkbox" value="{{ $category->id }}" name="categories_array[]">
+                            {{$category->name}}
+                        </input>
+                    </label>
+                    
+                @endforeach         
+            </div>
             <input type="submit" value="投稿"/>
         </form>
         <div class="footer">

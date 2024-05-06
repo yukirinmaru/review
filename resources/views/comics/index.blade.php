@@ -16,6 +16,11 @@
                         <a href="/comics/{{ $comic->id }}">{{ $comic->name }}</a>
                     </h2>
                     <p class='overview'>{{ $comic->overview }}</p>
+                    <h2 class='category'>
+                        @foreach($comic->categories as $category)
+                            {{ $category->name }}
+                        @endforeach
+                    </h2>
                     <form action="/comics/{{ $comic->id }}" id="form_{{ $comic->id }}" method="post">
                         @csrf
                         @method('DELETE')
