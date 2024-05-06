@@ -11,7 +11,9 @@
         <div class='comics'>
             @foreach ($comics as $comic)
                 <div class='comic'>
-                    <h2 class='name'>{{ $comic->name }}</h2>
+                    <h2 class='name'>
+                        <a href="/comics/{{ $comic->id }}">{{ $comic->name }}</a>
+                    </h2>
                     <p class='overview'>{{ $comic->overview }}</p>
                 </div>
             @endforeach
