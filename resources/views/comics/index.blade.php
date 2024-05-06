@@ -8,6 +8,7 @@
     </head>
     <body>
         <h1>Blog Name</h1>
+            <a href='/comics/create'>新規作成</a>
         <div class='comics'>
             @foreach ($comics as $comic)
                 <div class='comic'>

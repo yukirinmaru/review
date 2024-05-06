@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Comic;
+use App\Http\Requests\ComicRequest; // useする
 
 class ComicController extends Controller
 {
@@ -24,8 +24,18 @@ class ComicController extends Controller
         return view('comics.show')->with(['comic' => $comic]);
      //'post'はbladeファイルで使う変数。中身は$postはid=1のPostインスタンス。
     }
-        
     
+    public function create()
+    {
+        return view('comics.create');
+    }
+    
+    public function store(Comic $comic, ComicRequest $request)
+    {
+        $input = $request['comic'];
+        $comic->fill($input)->save();
+        return redirect('/comics/' . $comic->id);
+    }
 }
 
 ?>
