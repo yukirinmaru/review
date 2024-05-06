@@ -20,3 +20,5 @@ Route::get('/', function () {
 
 Route::get('/comics', [ComicController::class, 'index']);   
 Route::get('/', [ComicController::class, 'index']);
+Route::get('/comics/{comic}', [ComicController::class ,'show']);
+// '/posts/{対象データのID}'にGetリクエストが来たら、PostControllerのshowメソッドを実行する
