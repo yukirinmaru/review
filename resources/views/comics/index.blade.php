@@ -6,6 +6,11 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
+    
+    <x-app-layout>
+        <x-slot name="header">
+        </x-slot>
+    
     <body>
         <h1>Blog Name</h1>
             <a href='/comics/create'>新規作成</a>
@@ -28,6 +33,7 @@
                     </form>
                 </div>
             @endforeach
+            {{ Auth::user()->name }}
         </div>
         <div class='paginate'>
             {{ $comics->links() }}
@@ -42,4 +48,5 @@
             }
         </script>
     </body>
+    </x-app-layout>
 </html>
