@@ -13,6 +13,14 @@
     
     <body>
         <h1>Blog Name</h1>
+        
+        <div>
+          <form action="{{ route('comics.index') }}" method="GET">
+            <input type="text" name="keyword" value="{{ $keyword }}">
+            <input type="submit" value="検索">
+          </form>
+        </div>
+        
             <a href='/comics/create'>新規作成</a>
         <div class='comics'>
             @foreach ($comics as $comic)
@@ -33,7 +41,7 @@
                     </form>
                 </div>
             @endforeach
-            {{ Auth::user()->name }}
+        {{ Auth::user()->name }}
         </div>
         <div class='paginate'>
             {{ $comics->links() }}
