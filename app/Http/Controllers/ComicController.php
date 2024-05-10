@@ -5,14 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\Comic;
 use App\Http\Requests\ComicRequest; // useする
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class ComicController extends Controller
 {
-    public function index(Comic $comic)//インポートしたComicをインスタンス化して$cominとして使用
-        {
-            return view('comics.index')->with(['comics' => $comic->getPaginateByLimit()]);  
-       //blade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
-        }
+      
+        
+        public function index(Comic $comic, Request $request)
+             {
+                $keyword = $request->input('keyword');
+        
+                $query = Comic::query();
+        
+                if(!empty($keyword)) {
+                    $query->where('title', 'LIKE', "%{$keyword}%")
+                        ->orWhere('author', 'LIKE', "%{$keyword}%");
+                }
+        
+                $comics = $query->get();
+        
+                return view('comics.index', compact('comics', 'keyword'))->with(['comics' => $comic->getPaginateByLimit()]);
+            }
+        
 
     /**
      * 特定IDのpostを表示する
@@ -59,6 +73,8 @@ class ComicController extends Controller
                 $comic->delete();
                 return redirect('/');
             }
+            
+        
 }
 
 ?>
