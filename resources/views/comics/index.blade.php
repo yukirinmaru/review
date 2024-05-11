@@ -19,6 +19,24 @@
             <input type="text" name="keyword" value="{{ $keyword }}">
             <input type="submit" value="検索">
           </form>
+          @foreach($comicsearch as $comic)
+            <div class='comic'>
+                    <h2 class='name'>
+                        <a href="/comics/{{ $comic->id }}">{{ $comic->name }}</a>
+                    </h2>
+                    <p class='overview'>{{ $comic->overview }}</p>
+                    <h2 class='category'>
+                        @foreach($comic->categories as $category)
+                            {{ $category->name }}
+                        @endforeach
+                    </h2>
+                    <form action="/comics/{{ $comic->id }}" id="form_{{ $comic->id }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" onclick="deletePost({{ $comic->id }})">delete</button> 
+                    </form>
+                </div>
+            @endforeach
         </div>
         
             <a href='/comics/create'>新規作成</a>
