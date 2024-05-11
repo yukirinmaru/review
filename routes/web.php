@@ -11,8 +11,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
 Route::controller(ComicController::class)->middleware(['auth'])->group(function(){
     Route::get('/', 'index')->name('index');
+    Route::get('/search', 'index')->name('comics.index');
     Route::post('/comics', 'store')->name('store');
     Route::get('/comics/create', 'create')->name('create');
     Route::get('/comics/{comic}', 'show')->name('show');
@@ -30,6 +32,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
-Route::get('/', [ComicController::class, 'index'])
-    ->name('comics.index');

@@ -18,13 +18,13 @@ class ComicController extends Controller
                 $query = Comic::query();
         
                 if(!empty($keyword)) {
-                    $query->where('title', 'LIKE', "%{$keyword}%")
-                        ->orWhere('author', 'LIKE', "%{$keyword}%");
+                    $query->where('name', 'LIKE', "%{$keyword}%")
+                        ->orWhere('overview', 'LIKE', "%{$keyword}%");
                 }
         
                 $comics = $query->get();
         
-                return view('comics.index', compact('comics', 'keyword'))->with(['comics' => $comic->getPaginateByLimit()]);
+                return view('comics.index')->with(['comics' => $comic->getPaginateByLimit(), 'comicsearch' =>$comics, 'keyword' =>$keyword]);
             }
         
 
