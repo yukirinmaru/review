@@ -6,6 +6,7 @@ use App\Models\Comic;
 use App\Http\Requests\ComicRequest; // useする
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Comment;
 
 class ComicController extends Controller
 {
@@ -34,9 +35,11 @@ class ComicController extends Controller
      * @params Object Post // 引数の$postはid=1のPostインスタンス
      * @return Reposnse post view
      */
-    public function show(Comic $comic)
+    public function show(Comic $comic, Comment $comment)
         {
-            return view('comics.show')->with(['comic' => $comic]);
+            //comic_idとcomments tableのcomic_id
+            $comments = $comment->where("comic_id", $comic->id)->get();
+            return view('comics.show')->with(['comic' => $comic, 'comments'=> $comments]);
          //'post'はbladeファイルで使う変数。中身は$postはid=1のPostインスタンス。
         }
     
