@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('category_comic', function (Blueprint $table) {
             //category_idとcomic_idを外部キーに設定
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');   //参照先のテーブル名を
-            $table->foreignId('comic_id')->constrained('comics')->onDelete('cascade');   //参照先のテーブル名を
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');   //参照先のテーブル名を
+            $table->foreignId('comic_id')->constrained()->onDelete('cascade');   //参照先のテーブル名を
             $table->primary(['category_id', 'comic_id']); 
         });
     }
